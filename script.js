@@ -43,20 +43,35 @@
 
 // console.log(twoSum(numberArr, target));
 
-function groupAnagrams(strs) {
-  const newAnagrams = new Map();
+// function groupAnagrams(strs) {
+//   const newAnagrams = new Map();
 
-  for (let word of strs) {
-    let sortedWords = word.split("").sort().join("");
-    if (newAnagrams.has(sortedWords)) {
-      newAnagrams.get(sortedWords).push(word);
-    } else {
-      newAnagrams.set(sortedWords, [word]);
-    }
-  }
-  return Array.from(newAnagrams.values());
-}
+//   for (let word of strs) {
+//     let sortedWords = word.split("").sort().join("");
+//     if (newAnagrams.has(sortedWords)) {
+//       newAnagrams.get(sortedWords).push(word);
+//     } else {
+//       newAnagrams.set(sortedWords, [word]);
+//     }
+//   }
+//   return Array.from(newAnagrams.values());
+// }
 
-const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+// const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
 
-console.log(groupAnagrams(strs));
+// console.log(groupAnagrams(strs));
+
+var topKFrequent = function (nums, k) {
+  let counter = new Map();
+  console.log(counter);
+  nums.forEach((num) => {
+    counter.set(num, (counter.get(num) || 0) + 1);
+  });
+  let sorted = Array.from(counter.entries()).sort((a, b) => a - b);
+  console.log(sorted);
+    return sorted.slice(0, k).map((entry) => entry[0]);
+};
+let nums = [1, 1, 1, 2, 2, 3],
+  k = 2;
+
+console.log(topKFrequent(nums, k));
