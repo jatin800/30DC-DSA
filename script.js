@@ -27,18 +27,36 @@
 
 // console.log(validAnagram(s, t));
 
-function twoSum(numberArr, target) {
-  for (let i = 0; i < numberArr.length; i++) {
-    for (let j = i + 1; j < numberArr.length; j++) {
-      if (numberArr[i] + numberArr[j] === target) {
-        return [i, j];
-      }
+// function twoSum(numberArr, target) {
+//   for (let i = 0; i < numberArr.length; i++) {
+//     for (let j = i + 1; j < numberArr.length; j++) {
+//       if (numberArr[i] + numberArr[j] === target) {
+//         return [i, j];
+//       }
+//     }
+//   }
+// }
+
+// let numberArr = [2, 7, 11, 15];
+
+// let target = 9;
+
+// console.log(twoSum(numberArr, target));
+
+function groupAnagrams(strs) {
+  const newAnagrams = new Map();
+
+  for (let word of strs) {
+    let sortedWords = word.split("").sort().join("");
+    if (newAnagrams.has(sortedWords)) {
+      newAnagrams.get(sortedWords).push(word);
+    } else {
+      newAnagrams.set(sortedWords, [word]);
     }
   }
+  return Array.from(newAnagrams.values());
 }
 
-let numberArr = [2, 7, 11, 15];
+const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
 
-let target = 9;
-
-console.log(twoSum(numberArr, target));
+console.log(groupAnagrams(strs));
