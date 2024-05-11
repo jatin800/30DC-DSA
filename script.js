@@ -191,32 +191,46 @@
 // console.log(decodeVal);
 // console.log(encodeVal);
 
-// Initialize function longestConsecutive(nums)
-function longestConsecutive(nums) {
-  // Check if the input array is empty
+// // Initialize function longestConsecutive(nums)
+// function longestConsecutive(nums) {
+//   // Check if the input array is empty
 
-  if (nums.length === 0) return "Nikal";
+//   if (nums.length === 0) return "Nikal";
 
-  let newSet = new Set(nums);
-  let MAX_LEENGTH = 0;
+//   let newSet = new Set(nums);
+//   let MAX_LEENGTH = 0;
 
-  for (let set of newSet) {
-    if (!newSet.has(set - 1)) {
-      let currentNum = set;
-      let currentLength = 1;
+//   for (let set of newSet) {
+//     if (!newSet.has(set - 1)) {
+//       let currentNum = set;
+//       let currentLength = 1;
 
-      while (newSet.has(currentNum + 1)) {
-        currentNum++;
-        currentLength++;
-      }
+//       while (newSet.has(currentNum + 1)) {
+//         currentNum++;
+//         currentLength++;
+//       }
 
-      MAX_LEENGTH = Math.max(MAX_LEENGTH, currentLength);
-    }
-  }
-  return MAX_LEENGTH;
+//       MAX_LEENGTH = Math.max(MAX_LEENGTH, currentLength);
+//     }
+//   }
+//   return MAX_LEENGTH;
+// }
+
+// // Example input array 'nums'
+// const nums = [0, 1];
+// // Call the longestConsecutive function with input 'nums' and log the result
+// console.log(longestConsecutive(nums)); // Output should be the length of the longest consecutive sequence
+
+function isValidPalaidrom(s) {
+  console.log(s);
+  let str = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  console.log(str);
+  let str2 = str.split("").reverse().join("");
+  console.log(str2);
+
+  if (str === str2) return true;
+  else return false;
 }
 
-// Example input array 'nums'
-const nums = [0, 1];
-// Call the longestConsecutive function with input 'nums' and log the result
-console.log(longestConsecutive(nums)); // Output should be the length of the longest consecutive sequence
+let s = "race a car";
+console.log(isValidPalaidrom(s));
