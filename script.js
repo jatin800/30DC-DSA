@@ -138,22 +138,49 @@
 
 // console.log(validSudoku(board));
 
+// function funcEncoded(strgs) {
+//   return strgs.map((str) => `${str.length}/${str}`).join("");
+// }
+
+// function funcDecoded(strgs) {
+//   let result = [];
+
+//   for (let i = 0; i < strgs.length; i++) {
+//     let slashIndex = strgs.indexOf("/", i);
+//     let length = parseInt(strgs.slice(i, slashIndex));
+//     result.push(strgs.slice(slashIndex + 1, slashIndex + 1 + length));
+//   }
+//   return result;
+// }
+
+// let strgs = ["hello", "worlde", "leetcode"];
+// const encodeVal = funcEncoded(strgs);
+// const decodeVal = funcDecoded(encodeVal);
+// console.log(decodeVal);
+
+// console.log(encodeVal);
+
 function funcEncoded(strgs) {
-  return strgs.map((strg) => `${strg.length}/${strg}`).join("");
+  return strgs.map((str) => `${str.length}/${str}`).join("");
 }
 
 function funcDecoded(strgs) {
-  const result = [];
-  let i = 0;
+  let result = [];
 
+  // In the case of the funcDecoded function, we are iterating over an encoded string where the length of each encoded substring is not fixed. We need to dynamically find the next slash index to extract the length and then the substring itself.
+  // Here's how the while loop accomplishes this:
+  let i = 0;
   while (i < strgs.length) {
-    const slashIndex = strgs.indexOf("/", i);
-    // console.log(slashIndex);
-    const length = parseInt(strgs.slice(i, slashIndex));
-    // console.log(length)
+    let slashIndex = strgs.indexOf("/", i);
+    let length = parseInt(strgs.slice(i, slashIndex));
+    //We are using slice to extract a portion of the encoded string strgs starting from index i up to (but not including) the slashIndex. This portion contains the length of the current substring.
+    // Here's what each parameter represents:
+    // The first parameter i is the starting index from which to begin extracting the substring.
+    // The second parameter slashIndex is the index up to which the substring should be extracted.
+    // So, effectively, this line extracts the portion of the encoded string that represents the length of the current substring. This portion is then parsed into an integer using parseInt to get the actual length value.
 
     result.push(strgs.slice(slashIndex + 1, slashIndex + 1 + length));
-    i = slashIndex + length + 1;
+    i = slashIndex + 1 + length;
   }
   return result;
 }
@@ -162,5 +189,4 @@ let strgs = ["hello", "worlde", "leetcode"];
 const encodeVal = funcEncoded(strgs);
 const decodeVal = funcDecoded(encodeVal);
 console.log(decodeVal);
-
 console.log(encodeVal);
