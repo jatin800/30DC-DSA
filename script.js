@@ -160,33 +160,63 @@
 
 // console.log(encodeVal);
 
-function funcEncoded(strgs) {
-  return strgs.map((str) => `${str.length}/${str}`).join("");
-}
+// function funcEncoded(strgs) {
+//   return strgs.map((str) => `${str.length}/${str}`).join("");
+// }
 
-function funcDecoded(strgs) {
-  let result = [];
+// function funcDecoded(strgs) {
+//   let result = [];
 
-  // In the case of the funcDecoded function, we are iterating over an encoded string where the length of each encoded substring is not fixed. We need to dynamically find the next slash index to extract the length and then the substring itself.
-  // Here's how the while loop accomplishes this:
-  let i = 0;
-  while (i < strgs.length) {
-    let slashIndex = strgs.indexOf("/", i);
-    let length = parseInt(strgs.slice(i, slashIndex));
-    //We are using slice to extract a portion of the encoded string strgs starting from index i up to (but not including) the slashIndex. This portion contains the length of the current substring.
-    // Here's what each parameter represents:
-    // The first parameter i is the starting index from which to begin extracting the substring.
-    // The second parameter slashIndex is the index up to which the substring should be extracted.
-    // So, effectively, this line extracts the portion of the encoded string that represents the length of the current substring. This portion is then parsed into an integer using parseInt to get the actual length value.
+//   // In the case of the funcDecoded function, we are iterating over an encoded string where the length of each encoded substring is not fixed. We need to dynamically find the next slash index to extract the length and then the substring itself.
+//   // Here's how the while loop accomplishes this:
+//   let i = 0;
+//   while (i < strgs.length) {
+//     let slashIndex = strgs.indexOf("/", i);
+//     let length = parseInt(strgs.slice(i, slashIndex));
+//     //We are using slice to extract a portion of the encoded string strgs starting from index i up to (but not including) the slashIndex. This portion contains the length of the current substring.
+//     // Here's what each parameter represents:
+//     // The first parameter i is the starting index from which to begin extracting the substring.
+//     // The second parameter slashIndex is the index up to which the substring should be extracted.
+//     // So, effectively, this line extracts the portion of the encoded string that represents the length of the current substring. This portion is then parsed into an integer using parseInt to get the actual length value.
 
-    result.push(strgs.slice(slashIndex + 1, slashIndex + 1 + length));
-    i = slashIndex + 1 + length;
+//     result.push(strgs.slice(slashIndex + 1, slashIndex + 1 + length));
+//     i = slashIndex + 1 + length;
+//   }
+//   return result;
+// }
+
+// let strgs = ["hello", "worlde", "leetcode"];
+// const encodeVal = funcEncoded(strgs);
+// const decodeVal = funcDecoded(encodeVal);
+// console.log(decodeVal);
+// console.log(encodeVal);
+
+// Initialize function longestConsecutive(nums)
+function longestConsecutive(nums) {
+  // Check if the input array is empty
+
+  if (nums.length === 0) return "Nikal";
+
+  let newSet = new Set(nums);
+  let MAX_LEENGTH = 0;
+
+  for (let set of newSet) {
+    if (!newSet.has(set - 1)) {
+      let currentNum = set;
+      let currentLength = 1;
+
+      while (newSet.has(currentNum + 1)) {
+        currentNum++;
+        currentLength++;
+      }
+
+      MAX_LEENGTH = Math.max(MAX_LEENGTH, currentLength);
+    }
   }
-  return result;
+  return MAX_LEENGTH;
 }
 
-let strgs = ["hello", "worlde", "leetcode"];
-const encodeVal = funcEncoded(strgs);
-const decodeVal = funcDecoded(encodeVal);
-console.log(decodeVal);
-console.log(encodeVal);
+// Example input array 'nums'
+const nums = [0, 1];
+// Call the longestConsecutive function with input 'nums' and log the result
+console.log(longestConsecutive(nums)); // Output should be the length of the longest consecutive sequence
