@@ -74,22 +74,66 @@
 
 // console.log(topKFrequent(nums, k));
 
-var productExceptSelf = function (nums) {
-  let n = nums.length;
-  let output = new Array(n).fill(1);
-  leftSide = 1;
-  rightSide = 1;
+// var productExceptSelf = function (nums) {
+//   let n = nums.length;
+//   let output = new Array(n).fill(1);
+//   leftSide = 1;
+//   rightSide = 1;
 
-  for (let i = 0; i < n; i++) {
-    output[i] = leftSide;
-    leftSide *= nums[i];
+//   for (let i = 0; i < n; i++) {
+//     output[i] = leftSide;
+//     leftSide *= nums[i];
+//   }
+//   for (let i = n - 1; i >= 0; i--) {
+//     output[i] *= rightSide;
+//     rightSide *= nums[i];
+//   }
+//   return output;
+// };
+
+// const nums = [1, 2, 3, 4];
+// console.log(productExceptSelf(nums));
+
+var validSudoku = function (board) {
+  const newBoard = new Set(); // 'const' added for variable declaration
+
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      const cellVal = board[i][j];
+      if (cellVal !== ".") {
+        const rowVal = `row ${i} ${cellVal}`;
+        const colVal = `col ${j} ${cellVal}`;
+        const boxVal = `box ${Math.floor(i / 3)} ${Math.floor(
+          j / 3
+        )} ${cellVal}`; // Corrected box value calculation
+
+        if (
+          newBoard.has(rowVal) ||
+          newBoard.has(colVal) ||
+          newBoard.has(boxVal)
+        ) {
+          return false;
+        } else {
+          newBoard.add(rowVal);
+          newBoard.add(colVal);
+          newBoard.add(boxVal);
+        }
+      }
+    }
   }
-  for (let i = n - 1; i >= 0; i--) {
-    output[i] *= rightSide;
-    rightSide *= nums[i];
-  }
-  return output;
+  return true;
 };
 
-const nums = [1, 2, 3, 4];
-console.log(productExceptSelf(nums));
+const board = [
+  ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+  [".", "9", "8", ".", ".", ".", ".", "6", "."],
+  ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+  ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+  ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+  [".", "6", ".", ".", ".", ".", "2", "8", "."],
+  [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+  [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+];
+
+console.log(validSudoku(board));
