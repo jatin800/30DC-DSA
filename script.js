@@ -94,46 +94,73 @@
 // const nums = [1, 2, 3, 4];
 // console.log(productExceptSelf(nums));
 
-var validSudoku = function (board) {
-  const newBoard = new Set(); // 'const' added for variable declaration
+// var validSudoku = function (board) {
+//   const newBoard = new Set(); // 'const' added for variable declaration
 
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      const cellVal = board[i][j];
-      if (cellVal !== ".") {
-        const rowVal = `row ${i} ${cellVal}`;
-        const colVal = `col ${j} ${cellVal}`;
-        const boxVal = `box ${Math.floor(i / 3)} ${Math.floor(
-          j / 3
-        )} ${cellVal}`; // Corrected box value calculation
+//   for (let i = 0; i < 9; i++) {
+//     for (let j = 0; j < 9; j++) {
+//       const cellVal = board[i][j];
+//       if (cellVal !== ".") {
+//         const rowVal = `row ${i} ${cellVal}`;
+//         const colVal = `col ${j} ${cellVal}`;
+//         const boxVal = `box ${Math.floor(i / 3)} ${Math.floor(
+//           j / 3
+//         )} ${cellVal}`; // Corrected box value calculation
 
-        if (
-          newBoard.has(rowVal) ||
-          newBoard.has(colVal) ||
-          newBoard.has(boxVal)
-        ) {
-          return false;
-        } else {
-          newBoard.add(rowVal);
-          newBoard.add(colVal);
-          newBoard.add(boxVal);
-        }
-      }
-    }
+//         if (
+//           newBoard.has(rowVal) ||
+//           newBoard.has(colVal) ||
+//           newBoard.has(boxVal)
+//         ) {
+//           return false;
+//         } else {
+//           newBoard.add(rowVal);
+//           newBoard.add(colVal);
+//           newBoard.add(boxVal);
+//         }
+//       }
+//     }
+//   }
+//   return true;
+// };
+
+// const board = [
+//   ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+//   ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+//   [".", "9", "8", ".", ".", ".", ".", "6", "."],
+//   ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+//   ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+//   ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+//   [".", "6", ".", ".", ".", ".", "2", "8", "."],
+//   [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+//   [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+// ];
+
+// console.log(validSudoku(board));
+
+function funcEncoded(strgs) {
+  return strgs.map((strg) => `${strg.length}/${strg}`).join("");
+}
+
+function funcDecoded(strgs) {
+  const result = [];
+  let i = 0;
+
+  while (i < strgs.length) {
+    const slashIndex = strgs.indexOf("/", i);
+    // console.log(slashIndex);
+    const length = parseInt(strgs.slice(i, slashIndex));
+    // console.log(length)
+
+    result.push(strgs.slice(slashIndex + 1, slashIndex + 1 + length));
+    i = slashIndex + length + 1;
   }
-  return true;
-};
+  return result;
+}
 
-const board = [
-  ["5", "3", ".", ".", "7", ".", ".", ".", "."],
-  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-  [".", "9", "8", ".", ".", ".", ".", "6", "."],
-  ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-  ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-  ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-  [".", "6", ".", ".", ".", ".", "2", "8", "."],
-  [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-  [".", ".", ".", ".", "8", ".", ".", "7", "9"],
-];
+let strgs = ["hello", "worlde", "leetcode"];
+const encodeVal = funcEncoded(strgs);
+const decodeVal = funcDecoded(encodeVal);
+console.log(decodeVal);
 
-console.log(validSudoku(board));
+console.log(encodeVal);
