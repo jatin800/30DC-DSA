@@ -1,16 +1,17 @@
 // function containDuplicate(nums) {
-//   let newArray = [];
+//   let newArray = {};
 //   for (let num of nums) {
-//     if (newArray.includes(num)) {
+//     if (newArray.hasOwnProperty(num)) {
 //       return true;
 //     }
-//     newArray.push(num);
+//     newArray[num] = true; // Store element as key in the object
 //   }
+//   return false; // Return false if no duplicate is found
 // }
 
 // let nums = [1, 2, 3, 1];
 
-// console.log(containDuplicate(nums));
+// console.log(containDuplicate(nums)); // Output: true
 
 // function validAnagram(string1, string2) {
 //   let str1 = string1.split("").sort().join("");
@@ -61,17 +62,34 @@
 
 // console.log(groupAnagrams(strs));
 
-var topKFrequent = function (nums, k) {
-  let counter = new Map();
-  console.log(counter);
-  nums.forEach((num) => {
-    counter.set(num, (counter.get(num) || 0) + 1);
-  });
-  let sorted = Array.from(counter.entries()).sort((a, b) => a - b);
-  console.log(sorted);
-    return sorted.slice(0, k).map((entry) => entry[0]);
-};
-let nums = [1, 1, 1, 2, 2, 3],
-  k = 2;
+// var topKFrequent = function (nums, k) {
+//   let freqMap = new Map();
+//   nums.forEach((num) => freqMap.set(num, (freqMap.get(num) || 0) + 1));
 
-console.log(topKFrequent(nums, k));
+//   let sorted = Array.from(freqMap.entries()).sort((a, b) => a - b);
+//   return sorted.slice(0, k).map((entry) => entry[0]);
+// };
+// let nums = [1, 1, 1, 2, 2, 3],
+//   k = 2;
+
+// console.log(topKFrequent(nums, k));
+
+var productExceptSelf = function (nums) {
+  let n = nums.length;
+  let output = new Array(n).fill(1);
+  leftSide = 1;
+  rightSide = 1;
+
+  for (let i = 0; i < n; i++) {
+    output[i] = leftSide;
+    leftSide *= nums[i];
+  }
+  for (let i = n - 1; i >= 0; i--) {
+    output[i] *= rightSide;
+    rightSide *= nums[i];
+  }
+  return output;
+};
+
+const nums = [1, 2, 3, 4];
+console.log(productExceptSelf(nums));
