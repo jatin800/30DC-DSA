@@ -1,17 +1,18 @@
 // function containDuplicate(nums) {
-//   let newArray = {};
+//   let newSet = new Set();
+
 //   for (let num of nums) {
-//     if (newArray.hasOwnProperty(num)) {
+//     if (newSet.has(num)) {
 //       return true;
 //     }
-//     newArray[num] = true; // Store element as key in the object
+//     newSet.add(num);
 //   }
-//   return false; // Return false if no duplicate is found
+//   return false;
 // }
 
-// let nums = [1, 2, 3, 1];
+// const nums = [1, 2, 3, 1];
 
-// console.log(containDuplicate(nums)); // Output: true
+// console.log(containDuplicate(nums));
 
 // function validAnagram(string1, string2) {
 //   let str1 = string1.split("").sort().join("");
@@ -221,16 +222,37 @@
 // // Call the longestConsecutive function with input 'nums' and log the result
 // console.log(longestConsecutive(nums)); // Output should be the length of the longest consecutive sequence
 
-function isValidPalaidrom(s) {
-  console.log(s);
-  let str = s.toLowerCase().replace(/[^a-z0-9]/g, "");
-  console.log(str);
-  let str2 = str.split("").reverse().join("");
-  console.log(str2);
+// function isValidPalaidrom(s) {
+//   console.log(s);
+//   let str = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+//   console.log(str);
+//   let str2 = str.split("").reverse().join("");
+//   console.log(str2);
 
-  if (str === str2) return true;
-  else return false;
+//   if (str === str2) return true;
+//   else return false;
+// }
+
+// let s = "race a car";
+// console.log(isValidPalaidrom(s));
+
+function twoSum(nums, k) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    if (nums[left] + nums[right] === k) {
+      return [left + 1, right + 1];
+    } else if (nums[left] + nums[right] < k) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+  return [];
 }
 
-let s = "race a car";
-console.log(isValidPalaidrom(s));
+const nums = [5, 7, 5, 15];
+const k = 10; // Provide the target sum 'k'
+
+console.log(twoSum(nums, k)); // Output: [1, 2] (indices of the two numbers that add up to 9)
