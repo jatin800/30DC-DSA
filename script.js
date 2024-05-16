@@ -145,11 +145,12 @@
 
 // function funcDecoded(strgs) {
 //   let result = [];
-
-//   for (let i = 0; i < strgs.length; i++) {
+//   let i = 0;
+//   while (i < strgs.length) {
 //     let slashIndex = strgs.indexOf("/", i);
 //     let length = parseInt(strgs.slice(i, slashIndex));
 //     result.push(strgs.slice(slashIndex + 1, slashIndex + 1 + length));
+//     i = slashIndex + length + 1;
 //   }
 //   return result;
 // }
@@ -236,23 +237,264 @@
 // let s = "race a car";
 // console.log(isValidPalaidrom(s));
 
-function twoSum(nums, k) {
-  let left = 0;
-  let right = nums.length - 1;
+// function twoSum(nums, k) {
+//   let left = 0;
+//   let right = nums.length - 1;
 
-  while (left < right) {
-    if (nums[left] + nums[right] === k) {
-      return [left + 1, right + 1];
-    } else if (nums[left] + nums[right] < k) {
-      left++;
-    } else {
-      right--;
+//   while (left < right) {
+//     if (nums[left] + nums[right] === k) {
+//       return [left + 1, right + 1];
+//     } else if (nums[left] + nums[right] < k) {
+//       left++;
+//     } else {
+//       right--;
+//     }
+//   }
+//   return [];
+// }
+
+// const nums = [5, 7, 5, 15];
+// const k = 10; // Provide the target sum 'k'
+
+// console.log(twoSum(nums, k)); // Output: [1, 2] (indices of the two numbers that add up to 9)
+
+// function threeSum(nums) {
+//   nums.sort((a, b) => a - b);
+//   console.log(nums);
+//   let result = [];
+
+//   for (let i = 0; i < nums.length; i++) {
+//     debugger;
+//     if (i > 0 && nums[i] == nums[i - 1]) {
+//       continue;
+//     }
+//     let leftPointer = i + 1;
+//     let rightPointer = nums.length - 1;
+
+//     while (leftPointer < rightPointer) {
+//       const sum = nums[i] + nums[leftPointer] + nums[rightPointer];
+//       if (sum > 0) {
+//         rightPointer--;
+//       } else if (sum < 0) {
+//         leftPointer++;
+//       } else if (sum === 0) {
+//         result.push([nums[i], nums[leftPointer], nums[rightPointer]]);
+//         leftPointer++;
+//         while (
+//           nums[leftPointer] == nums[leftPointer - 1] &&
+//           leftPointer < rightPointer
+//         ) {
+//           leftPointer++;
+//         }
+//       }
+//     }
+//   }
+//   return result;
+// }
+
+// const nums = [-1, 0, 1, 2, -1, -4];
+
+// console.log(threeSum(nums));
+
+// var isValidSudoku = function (board) {
+//   const newBoard = new Set(); // 'const' added for variable declaration
+
+//   for (let i = 0; i < board.length; i++) {
+//     for (let j = 0; j < board.length; j++) {
+//       const cellVal = board[i][j];
+//       if (cellVal !== ".") {
+//         const rowVal = `row ${i} ${cellVal}`;
+//         const colVal = `col ${j} ${cellVal}`;
+//         const boxVal = `box ${Math.floor(i / 3)} ${Math.floor(
+//           j / 3
+//         )} ${cellVal}`; // Corrected box value calculation
+
+//         if (
+//           newBoard.has(rowVal) ||
+//           newBoard.has(colVal) ||
+//           newBoard.has(boxVal)
+//         ) {
+//           return "duplicate agya";
+//         } else {
+//           newBoard.add(rowVal);
+//           newBoard.add(colVal);
+//           newBoard.add(boxVal);
+//         }
+//       }
+//     }
+//   }
+//   return "koi duplicate nhi hai";
+// };
+
+// const board = [
+//   ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+//   ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+//   [".", "9", "8", ".", ".", ".", ".", "6", "."],
+//   ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+//   ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+//   ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+//   [".", "6", ".", ".", ".", ".", "2", "8", "."],
+//   [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+//   [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+// ];
+
+// console.log(isValidSudoku(board));
+
+// var longestConsecutive = function (nums) {
+//   if (nums.length === 0) return 0;
+//   const numSet = new Set(nums); // Creating a set from nums array
+//   let maxLength = 0;
+
+//   numSet.forEach((num) => {
+//     if (!numSet.has(num - 1)) {
+//       // Only start counting from the beginning of a sequence
+//       let currNum = num;
+//       let currLen = 1;
+//       while (numSet.has(currNum + 1)) {
+//         // Keep incrementing currNum until it's not present in numSet
+//         currNum++;
+//         currLen++;
+//       }
+//       maxLength = Math.max(maxLength, currLen); // Update maxLength if required
+//     }
+//   });
+
+//   return maxLength;
+// };
+
+// const nums = [99,100, 4, 200, 1, 1, 1, 1, 1, 3, 2];
+
+// console.log(longestConsecutive(nclg
+
+// /**
+//  * @param {number[]} height
+//  * @return {number}
+//  */
+// var trap = function (height) {
+//   // debugger;
+//   let left = 0;
+//   let right = height.length - 1;
+//   let leftMax = 0;
+//   let rightMax = 0;
+//   let water = 0;
+
+//   while (left < right) {
+//     if (height[left] <= height[right]) {
+//       leftMax = Math.max(leftMax, height[left]);
+//       water += leftMax - height[left];
+//       left++;
+//     } else {
+//       rightMax = Math.max(rightMax, height[right]);
+//       water += rightMax - height[right];
+//       right--;
+//     }
+//   }
+
+//   return water;
+// };
+
+// const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+
+// console.log(trap(height));
+
+// function characterReplacement(s, k) {
+//   const charCount = new Map();
+//   let maxCount = 0;
+//   let maxLen = 0;
+//   let rightPointer = 0;
+
+//   for (let leftPointer = 0; leftPointer < s.length; leftPointer++) {
+//     // Increment the count of the current character
+//     charCount[s[leftPointer]] = (charCount[s[leftPointer]] || 0) + 1;
+
+//     // Update the maximum count in the current window
+//     maxCount = Math.max(maxCount, charCount[s[leftPointer]]);
+
+//     // If the window size exceeds the maximum repeating character count + k
+//     // We need to shrink the window from the left
+//     while (leftPointer - rightPointer + 1 - maxCount > k) {
+//       charCount[s[rightPointer]]--;
+//       rightPointer++;
+//     }
+
+//     // Update the maximum length
+//     maxLen = Math.max(maxLen, leftPointer - rightPointer + 1);
+//   }
+
+//   return maxLen;
+// }
+
+// const s = "AABABBA",
+//   k = 1;
+
+// console.log(characterReplacement(s, k));
+
+// function maxArea(height) {
+//   let max = 0;
+//   let leftPointer = 0;
+//   let rightPointer = height.length - 1;
+
+//   while (leftPointer < rightPointer) {
+//     let width = rightPointer - leftPointer;
+//     let currHeight = Math.min(height[leftPointer], height[rightPointer]);
+//     const area = width * currHeight;
+//     max = Math.max(max, area);
+//     if (height[leftPointer] < height[rightPointer]) {
+//       leftPointer++;
+//     } else {
+//       rightPointer--;
+//     }
+//   }
+//   return max;
+// }
+
+// const height = [1, 8, 6, 2, 5, 4, 8, 3, 7];
+// console.log(maxArea(height));
+
+function threeSum(nums) {
+  const sortedNum = nums.sort((a, b) => a - b);
+  const result = [];
+  console.log(sortedNum);
+  for (let i = 0; i < sortedNum.length; i++) {
+    if (i > 0 && sortedNum[i] == sortedNum[i - 1]) {
+      continue;
+    }
+    let leftPointer = i + 1;
+    let rightPointer = nums.length - 1;
+    while (leftPointer < rightPointer) {
+      let sum = [
+        sortedNum[i] + sortedNum[leftPointer] + sortedNum[rightPointer],
+      ];
+      if (sum > 0) {
+        rightPointer--;
+      } else if (sum < 0) {
+        leftPointer++;
+      } else {
+        result.push([
+          sortedNum[i],
+          sortedNum[leftPointer],
+          sortedNum[rightPointer],
+        ]);
+        leftPointer++;
+        rightPointer--;
+        while (
+          leftPointer < rightPointer &&
+          sortedNum[leftPointer] == sortedNum[leftPointer - 1]
+        ) {
+          leftPointer++;
+        }
+        while (
+          leftPointer < rightPointer &&
+          sortedNum[rightPointer] == sortedNum[rightPointer + 1]
+        ) {
+          rightPointer--;
+        }
+      }
     }
   }
-  return [];
+  return result;
 }
 
-const nums = [5, 7, 5, 15];
-const k = 10; // Provide the target sum 'k'
+const nums = [-1, 0, 1, 2, -1, -4];
 
-console.log(twoSum(nums, k)); // Output: [1, 2] (indices of the two numbers that add up to 9)
+console.log(threeSum(nums));
