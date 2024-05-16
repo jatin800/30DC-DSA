@@ -451,50 +451,85 @@
 // const height = [1, 8, 6, 2, 5, 4, 8, 3, 7];
 // console.log(maxArea(height));
 
-function threeSum(nums) {
-  const sortedNum = nums.sort((a, b) => a - b);
-  const result = [];
-  console.log(sortedNum);
-  for (let i = 0; i < sortedNum.length; i++) {
-    if (i > 0 && sortedNum[i] == sortedNum[i - 1]) {
-      continue;
-    }
-    let leftPointer = i + 1;
-    let rightPointer = nums.length - 1;
-    while (leftPointer < rightPointer) {
-      let sum = [
-        sortedNum[i] + sortedNum[leftPointer] + sortedNum[rightPointer],
-      ];
-      if (sum > 0) {
-        rightPointer--;
-      } else if (sum < 0) {
-        leftPointer++;
-      } else {
-        result.push([
-          sortedNum[i],
-          sortedNum[leftPointer],
-          sortedNum[rightPointer],
-        ]);
-        leftPointer++;
-        rightPointer--;
-        while (
-          leftPointer < rightPointer &&
-          sortedNum[leftPointer] == sortedNum[leftPointer - 1]
-        ) {
-          leftPointer++;
-        }
-        while (
-          leftPointer < rightPointer &&
-          sortedNum[rightPointer] == sortedNum[rightPointer + 1]
-        ) {
-          rightPointer--;
-        }
-      }
-    }
+// function threeSum(nums) {
+//   const sortedNum = nums.sort((a, b) => a - b);
+//   const result = [];
+//   console.log(sortedNum);
+//   for (let i = 0; i < sortedNum.length; i++) {
+//     if (i > 0 && sortedNum[i] == sortedNum[i - 1]) {
+//       continue;
+//     }
+//     let leftPointer = i + 1;
+//     let rightPointer = nums.length - 1;
+//     while (leftPointer < rightPointer) {
+//       let sum = [
+//         sortedNum[i] + sortedNum[leftPointer] + sortedNum[rightPointer],
+//       ];
+//       if (sum > 0) {
+//         rightPointer--;
+//       } else if (sum < 0) {
+//         leftPointer++;
+//       } else {
+//         result.push([
+//           sortedNum[i],
+//           sortedNum[leftPointer],
+//           sortedNum[rightPointer],
+//         ]);
+//         leftPointer++;
+//         rightPointer--;
+//         while (
+//           leftPointer < rightPointer &&
+//           sortedNum[leftPointer] == sortedNum[leftPointer - 1]
+//         ) {
+//           leftPointer++;
+//         }
+//         while (
+//           leftPointer < rightPointer &&
+//           sortedNum[rightPointer] == sortedNum[rightPointer + 1]
+//         ) {
+//           rightPointer--;
+//         }
+//       }
+//     }
+//   }
+//   return result;
+// }
+
+// const nums = [-1, 0, 1, 2, -1, -4];
+
+// console.log(threeSum(nums));
+
+function func(substring, string) {
+  if (substring > string) return false;
+
+  const substringLength = substring.length;
+  const stringLength = string.length;
+
+  const array1 = new Array(26).fill(0);
+  const array2 = new Array(26).fill(0);
+
+  for (let i = 0; i < substringLength; i++) {
+    array1[substring.charCodeAt(i) - 97]++;
+    array2[string.charCodeAt(i) - 97]++;
   }
-  return result;
+
+  for (let i = substringLength; i < stringLength; i++) {
+    if (arrayEqual(array1, array2)) return true;
+    array2[string.charCodeAt(i) - 97]++;
+    array2[string.charCodeAt(i - substringLength) - 97]--;
+  }
 }
 
-const nums = [-1, 0, 1, 2, -1, -4];
+function arrayEqual(array1, array2) {
+  for (let i = 0; i < 26; i++) {
+    if (array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
 
-console.log(threeSum(nums));
+const s1 = "ab",
+  s2 = "eidbaooo";
+
+console.log(func(s1, s2));
