@@ -534,26 +534,40 @@
 
 // console.log(func(s1, s2));
 
-function func(height) {
-  let right = height.length - 1;
-  let left = 0;
-  let rightMaxArea = 0;
-  let leftMaxArea = 0;
-  let water = 0;
-  while (left < right) {
-    if (height[left] <= height[right]) {
-      leftMaxArea = Math.max(leftMaxArea, height[left]);
-      water += leftMaxArea - height[left];
-      left++;
-    } else {
-      rightMaxArea = Math.max(rightMaxArea, height[right]);
-      water += rightMaxArea - height[right];
-      right--;
-    }
+// function func(height) {
+//   let right = height.length - 1;
+//   let left = 0;
+//   let rightMaxArea = 0;
+//   let leftMaxArea = 0;
+//   let water = 0;
+//   while (left < right) {
+//     if (height[left] <= height[right]) {
+//       leftMaxArea = Math.max(leftMaxArea, height[left]);
+//       water += leftMaxArea - height[left];
+//       left++;
+//     } else {
+//       rightMaxArea = Math.max(rightMaxArea, height[right]);
+//       water += rightMaxArea - height[right];
+//       right--;
+//     }
+//   }
+//   return water;
+// }
+
+// const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+
+// console.log(func(height));
+
+function func(prices) {
+  let minPrice = Infinity;
+  let maxPrice = 0;
+
+  for (let price of prices) {
+    minPrice = Math.min(minPrice, price);
+    maxPrice = Math.max(maxPrice, price - minPrice);
   }
-  return water;
+  return maxPrice;
 }
 
-const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
-
-console.log(func(height));
+const prices = [7, 1, 5, 3, 6, 4];
+console.log(func(prices));
