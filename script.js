@@ -572,20 +572,48 @@
 // const prices = [7, 1, 5, 3, 6, 4];
 // console.log(func(prices));
 
-function func(s) {
+// function func(s) {
+//   let maxLength = 0;
+//   let start = 0;
+//   const charMap = new Map();
+//   for (let i = 0; i < s.length; i++) {
+//     let char = s[i];
+//     if (charMap.has(char) && charMap.get(char) >= start) {
+//       start = charMap.get(char) + 1;
+//     }
+//     charMap.set(char, i);
+//     maxLength = Math.max(maxLength, i - start + 1);
+//   }
+//   return maxLength;
+// }
+
+// const s = "abcabcbb";
+// console.log(func(s));
+
+function func(s, k) {
+  if (!s || k === undefined) return 0;
+
+  const freq = new Map();
+  let maxCount = 0;
+  let left = 0;
   let maxLength = 0;
-  let start = 0;
-  const charMap = new Map();
-  for (let i = 0; i < s.length; i++) {
-    let char = s[i];
-    if (charMap.has(char) && charMap.get(char) >= start) {
-      start = charMap.get(char) + 1;
+
+  for (let right = 0; right < s.length; right++) {
+    let rightChar = s[right];
+    freq.set(rightChar, (freq.get(rightChar) || 0) + 1);
+    maxCount = Math.max(maxCount, freq.get(rightChar));
+    
+    while (right - left + 1 - maxCount > k) {
+      let leftChar = s[left];
+      freq.set(leftChar, freq.get(leftChar) - 1);
+      left++;
     }
-    charMap.set(char, i);
-    maxLength = Math.max(maxLength, i - start + 1);
+    maxLength = Math.max(maxLength, right - left + 1);
   }
   return maxLength;
 }
 
-const s = "abcabcbb";
-console.log(func(s));
+const s = "ABAB", k = 2;
+
+console.log(func(s, k)); // Expected output: 4
+
