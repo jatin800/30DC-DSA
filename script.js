@@ -499,37 +499,61 @@
 
 // console.log(threeSum(nums));
 
-function func(substring, string) {
-  if (substring > string) return false;
+// function func(substring, string) {
+//   if (substring > string) return false;
 
-  const substringLength = substring.length;
-  const stringLength = string.length;
+//   const substringLength = substring.length;
+//   const stringLength = string.length;
 
-  const array1 = new Array(26).fill(0);
-  const array2 = new Array(26).fill(0);
+//   const array1 = new Array(26).fill(0);
+//   const array2 = new Array(26).fill(0);
 
-  for (let i = 0; i < substringLength; i++) {
-    array1[substring.charCodeAt(i) - 97]++;
-    array2[string.charCodeAt(i) - 97]++;
-  }
+//   for (let i = 0; i < substringLength; i++) {
+//     array1[substring.charCodeAt(i) - 97]++;
+//     array2[string.charCodeAt(i) - 97]++;
+//   }
 
-  for (let i = substringLength; i < stringLength; i++) {
-    if (arrayEqual(array1, array2)) return true;
-    array2[string.charCodeAt(i) - 97]++;
-    array2[string.charCodeAt(i - substringLength) - 97]--;
-  }
-}
+//   for (let i = substringLength; i < stringLength; i++) {
+//     if (arrayEqual(array1, array2)) return true;
+//     array2[string.charCodeAt(i) - 97]++;
+//     array2[string.charCodeAt(i - substringLength) - 97]--;
+//   }
+// }
 
-function arrayEqual(array1, array2) {
-  for (let i = 0; i < 26; i++) {
-    if (array1[i] !== array2[i]) {
-      return false;
+// function arrayEqual(array1, array2) {
+//   for (let i = 0; i < 26; i++) {
+//     if (array1[i] !== array2[i]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+// const s1 = "ab",
+//   s2 = "eidbaooo";
+
+// console.log(func(s1, s2));
+
+function func(height) {
+  let right = height.length - 1;
+  let left = 0;
+  let rightMaxArea = 0;
+  let leftMaxArea = 0;
+  let water = 0;
+  while (left < right) {
+    if (height[left] <= height[right]) {
+      leftMaxArea = Math.max(leftMaxArea, height[left]);
+      water += leftMaxArea - height[left];
+      left++;
+    } else {
+      rightMaxArea = Math.max(rightMaxArea, height[right]);
+      water += rightMaxArea - height[right];
+      right--;
     }
   }
-  return true;
+  return water;
 }
 
-const s1 = "ab",
-  s2 = "eidbaooo";
+const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
 
-console.log(func(s1, s2));
+console.log(func(height));
