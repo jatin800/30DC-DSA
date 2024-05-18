@@ -558,16 +558,34 @@
 
 // console.log(func(height));
 
-function func(prices) {
-  let minPrice = Infinity;
-  let maxPrice = 0;
+// function func(prices) {
+//   let minPrice = Infinity;
+//   let maxPrice = 0;
 
-  for (let price of prices) {
-    minPrice = Math.min(minPrice, price);
-    maxPrice = Math.max(maxPrice, price - minPrice);
+//   for (let price of prices) {
+//     minPrice = Math.min(minPrice, price);
+//     maxPrice = Math.max(maxPrice, price - minPrice);
+//   }
+//   return maxPrice;
+// }
+
+// const prices = [7, 1, 5, 3, 6, 4];
+// console.log(func(prices));
+
+function func(s) {
+  let maxLength = 0;
+  let start = 0;
+  const charMap = new Map();
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+    if (charMap.has(char) && charMap.get(char) >= start) {
+      start = charMap.get(char) + 1;
+    }
+    charMap.set(char, i);
+    maxLength = Math.max(maxLength, i - start + 1);
   }
-  return maxPrice;
+  return maxLength;
 }
 
-const prices = [7, 1, 5, 3, 6, 4];
-console.log(func(prices));
+const s = "abcabcbb";
+console.log(func(s));
