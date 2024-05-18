@@ -590,30 +590,63 @@
 // const s = "abcabcbb";
 // console.log(func(s));
 
-function func(s, k) {
-  if (!s || k === undefined) return 0;
+// function func(s, k) {
+//   if (!s || k === undefined) return 0;
 
-  const freq = new Map();
-  let maxCount = 0;
+//   const freq = new Map();
+//   let maxCount = 0;
+//   let left = 0;
+//   let maxLength = 0;
+
+//   for (let right = 0; right < s.length; right++) {
+//     let rightChar = s[right];
+//     freq.set(rightChar, (freq.get(rightChar) || 0) + 1);
+//     maxCount = Math.max(maxCount, freq.get(rightChar));
+
+//     while (right - left + 1 - maxCount > k) {
+//       let leftChar = s[left];
+//       freq.set(leftChar, freq.get(leftChar) - 1);
+//       left++;
+//     }
+//     maxLength = Math.max(maxLength, right - left + 1);
+//   }
+//   return maxLength;
+// }
+
+// const s = "ABAB", k = 2;
+
+// console.log(func(s, k)); // Expected output: 4
+
+//
+
+//
+
+//
+
+// You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+// Find two lines that together with the x-axis form a container, such that the container contains the most water.
+// Return the maximum amount of water a container can store.
+// Notice that you may not slant the container.
+function func(height) {
   let left = 0;
-  let maxLength = 0;
-
-  for (let right = 0; right < s.length; right++) {
-    let rightChar = s[right];
-    freq.set(rightChar, (freq.get(rightChar) || 0) + 1);
-    maxCount = Math.max(maxCount, freq.get(rightChar));
-    
-    while (right - left + 1 - maxCount > k) {
-      let leftChar = s[left];
-      freq.set(leftChar, freq.get(leftChar) - 1);
+  let right = height.length - 1;
+  let maxWater = 0;
+  while (left < right) {
+    let width = right - left;
+    let h = Math.min(height[left], height[right]);
+    let water = width * h;
+    maxWater = Math.max(maxWater, water);
+    if (height[left] < height[right]) {
       left++;
+    } else {
+      right--;
     }
-    maxLength = Math.max(maxLength, right - left + 1);
   }
-  return maxLength;
+  return maxWater;
 }
-
-const s = "ABAB", k = 2;
-
-console.log(func(s, k)); // Expected output: 4
-
+const height = [1, 8, 6, 2, 5, 4, 8, 3, 7];
+console.log(func(height));
+// Output: 49;
+// Explanation: The above vertical lines are represented by array
+// [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section)
+// the container can contain is 49.
