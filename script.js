@@ -635,3 +635,24 @@
 // const nums = [1, 3, -1, -3, 5, 3, 6, 7],
 //   k = 3;
 // console.log(func(s, k)); // Expected output:
+
+function func(s) {
+  const stack = [];
+  const map = { "(": ")", "[": "]", "{": "}" };
+
+  for (let i = 0; i < s.length; i++) {
+    let str = s[i];
+    if (map.hasOwnProperty(str)) {
+      stack.push(str);
+    } else {
+      const remainingPart = stack.pop();
+      if (!map.hasOwnProperty(remainingPart)) {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+
+const s = "()";
+console.log(func(s));
