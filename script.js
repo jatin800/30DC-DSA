@@ -617,28 +617,21 @@
 
 // console.log(func(s, k)); // Expected output: 4
 
-//
+// function func(s, k) {
+//   const result = [];
+//   const deque = [];
+//   for (let i = 0; i < s.length; i++) {
+//     let dequeLastIndexValue = deque[deque.length - 1];
+//     while (deque.length > 0 && nums[dequeLastIndexValue] <= nums[i]) {
+//       deque.pop();
+//     }
+//     if (deque[0] <= i - k) deque.shift();
+//     deque.push(i);
+//     if (i >= k - 1) result.push(nums[deque[0]]);
+//   }
+//   return result;
+// }
 
-//
-
-//
-
-function func(height) {
-  let left = 0;
-  let right = height.length - 1;
-  let maxWater = 0;
-  while (left < right) {
-    let width = right - left;
-    let h = Math.min(height[left], height[right]);
-    let water = width * h;
-    maxWater = Math.max(maxWater, water);
-    if (height[left] < height[right]) {
-      left++;
-    } else {
-      right--;
-    }
-  }
-  return maxWater;
-}
-const height = [1, 8, 6, 2, 5, 4, 8, 3, 7];
-console.log(func(height));
+// const nums = [1, 3, -1, -3, 5, 3, 6, 7],
+//   k = 3;
+// console.log(func(s, k)); // Expected output:
