@@ -685,6 +685,37 @@
 //   return this.minStack[this.minStack.length - 1];
 // };
 
+function func() {
+  const stack = [];
+  const operator = ["+", "-", "*", "/"];
 
+  for (let token of tokens) {
+    if (!operator.includes.includes(token)) {
+      stack.push(Number(token));
+    } else {
+      const oprnd2 = stack.pop();
+      const oprnd1 = stack.pop();
 
+      switch (token) {
+        case "+":
+          stack.push(oprnd1 + oprnd2);
+          break;
+        case "-":
+          stack.push(oprnd1 + oprnd2);
+          break;
+        case "*":
+          stack.push(oprnd1 + oprnd2);
+          break;
+        case "/":
+          stack.push(Math.trunc(oprnd1 + oprnd2));
+          break;
+        default:
+          break;
+      }
+    }
+  }
+  return stack.pop();
+}
 
+const tokens = ["2", "1", "+", "3", "*"];
+console.log(func(tokens));
