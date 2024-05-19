@@ -763,25 +763,46 @@
 
 // console.log(func(temperatures));
 
-var func = function (heights) {
-  const stack = [];
-  let maxArea = 0;
-  for (let i = 0; i <= heights.length; i++) {
-    let currentHeight = i === heights.length ? 0 : heights[i];
-    while (
-      stack.length > 0 &&
-      currentHeight < heights[stack[stack.length - 1]]
-    ) {
-      const topIndex = stack.pop();
-      const topHeight = heights[topIndex];
-      let width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
-      let area = topHeight * width;
-      maxArea = Math.max(maxArea, area);
+// var func = function (heights) {
+//   const stack = [];
+//   let maxArea = 0;
+//   for (let i = 0; i <= heights.length; i++) {
+//     let currentHeight = i === heights.length ? 0 : heights[i];
+//     while (
+//       stack.length > 0 &&
+//       currentHeight < heights[stack[stack.length - 1]]
+//     ) {
+//       const topIndex = stack.pop();
+//       const topHeight = heights[topIndex];
+//       let width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+//       let area = topHeight * width;
+//       maxArea = Math.max(maxArea, area);
+//     }
+//     stack.push(i);
+//   }
+//   return maxArea;
+// };
+
+// const heights = [2, 4];
+// console.log(func(heights));
+
+var func = function (nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) {
+      return mid;
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
     }
-    stack.push(i);
   }
-  return maxArea;
+  return -1;
 };
 
-const heights = [2, 4];
-console.log(func(heights));
+const nums = [-1, 0, 3, 5, 9, 12],
+  target = 9;
+
+console.log(func(nums, target));
