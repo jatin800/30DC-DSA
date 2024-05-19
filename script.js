@@ -741,24 +741,47 @@
 // const n = 3;
 // console.log(func(n));
 
-var func = function (temperatures) {
-  const stack = [];
-  const answer = new Array(temperatures.length).fill(0);
-  let length = temperatures.length;
+// var func = function (temperatures) {
+//   const stack = [];
+//   const answer = new Array(temperatures.length).fill(0);
+//   let length = temperatures.length;
 
-  for (i = length - 1; i >= 0; i--) {
+//   for (i = length - 1; i >= 0; i--) {
+//     while (
+//       stack.length > 0 &&
+//       temperatures[i] >= temperatures[stack[stack.length - 1]]
+//     ) {
+//       stack.pop();
+//     }
+//     answer[i] = stack.length === 0 ? 0 : stack[stack.length - 1] - i;
+//     stack.push(i);
+//   }
+//   return answer;
+// };
+
+// const temperatures = [73,74,75,71,69,72,76,73];
+
+// console.log(func(temperatures));
+
+var func = function (heights) {
+  const stack = [];
+  let maxArea = 0;
+  for (let i = 0; i <= heights.length; i++) {
+    let currentHeight = i === heights.length ? 0 : heights[i];
     while (
       stack.length > 0 &&
-      temperatures[i] >= temperatures[stack[stack.length - 1]]
+      currentHeight < heights[stack[stack.length - 1]]
     ) {
-      stack.pop();
+      const topIndex = stack.pop();
+      const topHeight = heights[topIndex];
+      let width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+      let area = topHeight * width;
+      maxArea = Math.max(maxArea, area);
     }
-    answer[i] = stack.length === 0 ? 0 : stack[stack.length - 1] - i;
     stack.push(i);
   }
-  return answer;
+  return maxArea;
 };
 
-const temperatures = [73,74,75,71,69,72,76,73];
-
-console.log(func(temperatures));
+const heights = [2, 4];
+console.log(func(heights));
