@@ -636,23 +636,55 @@
 //   k = 3;
 // console.log(func(s, k)); // Expected output:
 
-function func(s) {
-  const stack = [];
-  const map = { "(": ")", "[": "]", "{": "}" };
+// function func(s) {
+//   const stack = [];
+//   const map = { "(": ")", "[": "]", "{": "}" };
 
-  for (let i = 0; i < s.length; i++) {
-    let str = s[i];
-    if (map.hasOwnProperty(str)) {
-      stack.push(str);
-    } else {
-      const remainingPart = stack.pop();
-      if (!map.hasOwnProperty(remainingPart)) {
-        return false;
-      }
-    }
-  }
-  return stack.length === 0;
-}
+//   for (let i = 0; i < s.length; i++) {
+//     let str = s[i];
+//     if (map.hasOwnProperty(str)) {
+//       stack.push(str);
+//     } else {
+//       const remainingPart = stack.pop();
+//       if (!map.hasOwnProperty(remainingPart)) {
+//         return false;
+//       }
+//     }
+//   }
+//   return stack.length === 0;
+// }
 
-const s = "()";
-console.log(func(s));
+// const s = "()";
+// console.log(func(s));
+
+// function Function() {
+//   this.stack = [];
+//   this.minStack = [];
+// }
+
+// Function.prototype.push = function (value) {
+//   this.stack.push(value);
+//   if (
+//     this.inStack.length === 0 ||
+//     value <= this.minStack[this.minStack.length - 1]
+//   ) {
+//     this.minStack.push(value);
+//   }
+// };
+
+// Function.prototype.pop = function (value) {
+//   const popvalue = this.stack.pop();
+//   if (popvalue === this.minStack[this.minStack.length - 1]) {
+//     this.minStack.pop();
+//   }
+// };
+// Function.prototype.top = function (value) {
+//   return this.stack[this.stack.length - 1];
+// };
+// Function.prototype.getMin = function (value) {
+//   return this.minStack[this.minStack.length - 1];
+// };
+
+
+
+
