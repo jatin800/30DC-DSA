@@ -720,23 +720,45 @@
 // const tokens = ["2", "1", "+", "3", "*"];
 // console.log(func(tokens));
 
-function func(n) {
-  const array = [];
-  const backTrack = (open, close, str) => {
-    if (str.length === n * 2) {
-      array.push(str);
-      return;
-    }
-    if (open < n) {
-      backTrack(open + 1, close, str + "(");
-    }
-    if (close < open) {
-      backTrack(open, close + 1, str + ")");
-    }
-  };
-  backTrack(0, 0, "");
-  return array;
-}
+// function func(n) {
+//   const array = [];
+//   const backTrack = (open, close, str) => {
+//     if (str.length === n * 2) {
+//       array.push(str);
+//       return;
+//     }
+//     if (open < n) {
+//       backTrack(open + 1, close, str + "(");
+//     }
+//     if (close < open) {
+//       backTrack(open, close + 1, str + ")");
+//     }
+//   };
+//   backTrack(0, 0, "");
+//   return array;
+// }
 
-const n = 3;
-console.log(func(n));
+// const n = 3;
+// console.log(func(n));
+
+var func = function (temperatures) {
+  const stack = [];
+  const answer = new Array(temperatures.length).fill(0);
+  let length = temperatures.length;
+
+  for (i = length - 1; i >= 0; i--) {
+    while (
+      stack.length > 0 &&
+      temperatures[i] >= temperatures[stack[stack.length - 1]]
+    ) {
+      stack.pop();
+    }
+    answer[i] = stack.length === 0 ? 0 : stack[stack.length - 1] - i;
+    stack.push(i);
+  }
+  return answer;
+};
+
+const temperatures = [73,74,75,71,69,72,76,73];
+
+console.log(func(temperatures));
