@@ -685,37 +685,58 @@
 //   return this.minStack[this.minStack.length - 1];
 // };
 
-function func() {
-  const stack = [];
-  const operator = ["+", "-", "*", "/"];
+// function func() {
+//   const stack = [];
+//   const operator = ["+", "-", "*", "/"];
 
-  for (let token of tokens) {
-    if (!operator.includes.includes(token)) {
-      stack.push(Number(token));
-    } else {
-      const oprnd2 = stack.pop();
-      const oprnd1 = stack.pop();
+//   for (let token of tokens) {
+//     if (!operator.includes.includes(token)) {
+//       stack.push(Number(token));
+//     } else {
+//       const oprnd2 = stack.pop();
+//       const oprnd1 = stack.pop();
 
-      switch (token) {
-        case "+":
-          stack.push(oprnd1 + oprnd2);
-          break;
-        case "-":
-          stack.push(oprnd1 + oprnd2);
-          break;
-        case "*":
-          stack.push(oprnd1 + oprnd2);
-          break;
-        case "/":
-          stack.push(Math.trunc(oprnd1 + oprnd2));
-          break;
-        default:
-          break;
-      }
+//       switch (token) {
+//         case "+":
+//           stack.push(oprnd1 + oprnd2);
+//           break;
+//         case "-":
+//           stack.push(oprnd1 + oprnd2);
+//           break;
+//         case "*":
+//           stack.push(oprnd1 + oprnd2);
+//           break;
+//         case "/":
+//           stack.push(Math.trunc(oprnd1 + oprnd2));
+//           break;
+//         default:
+//           break;
+//       }
+//     }
+//   }
+//   return stack.pop();
+// }
+
+// const tokens = ["2", "1", "+", "3", "*"];
+// console.log(func(tokens));
+
+function func(n) {
+  const array = [];
+  const backTrack = (open, close, str) => {
+    if (str.length === n * 2) {
+      array.push(str);
+      return;
     }
-  }
-  return stack.pop();
+    if (open < n) {
+      backTrack(open + 1, close, str + "(");
+    }
+    if (close < open) {
+      backTrack(open, close + 1, str + ")");
+    }
+  };
+  backTrack(0, 0, "");
+  return array;
 }
 
-const tokens = ["2", "1", "+", "3", "*"];
-console.log(func(tokens));
+const n = 3;
+console.log(func(n));
