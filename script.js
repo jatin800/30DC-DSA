@@ -782,27 +782,44 @@
 //   }
 //   return maxArea;
 // };
-
 // const heights = [2, 4];
 // console.log(func(heights));
-
-var func = function (nums, target) {
-  let left = 0;
-  let right = nums.length - 1;
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-    if (nums[mid] === target) {
-      return mid;
-    } else if (nums[mid] < target) {
-      left = mid + 1;
-    } else {
-      right = mid - 1;
-    }
-  }
-  return -1;
-};
-
-const nums = [-1, 0, 3, 5, 9, 12],
-  target = 9;
-
-console.log(func(nums, target));
+// var func = function (nums, target) {
+//   let left = 0;
+//   let right = nums.length - 1;
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2);
+//     if (nums[mid] === target) {
+//       return mid;
+//     } else if (nums[mid] < target) {
+//       left = mid + 1;
+//     } else {
+//       right = mid - 1;
+//     }
+//   }
+//   return -1;
+// };
+// const nums = [-1, 0, 3, 5, 9, 12],
+//   target = 9;
+// console.log(func(nums, target));
+// var func = function (mt, tt) {
+//   let matrix = mt;
+//   let target = tt;
+//   let m = matrix.length;
+//   let n = matrix[0].length;
+//   let left = 0;
+//   right = m * n - 1;
+//   while (left <= right) {
+//     let midPoint = Math.floor((left + right) / 2);
+//     path = midPoint / n;
+//     path2 = midPoint % n;
+//     let midValue = matrix[Math.floor(path)][path2];
+//     let plusOne = midPoint + 1;
+//     let minusOne = midPoint - 1;
+//     if (midValue === target) return true;
+//     else if (midValue < target) left = plusOne;
+//     else right = minusOne;
+//   }
+//   return false;
+// };
+// console.log(func(matrix, target));
