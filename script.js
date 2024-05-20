@@ -823,3 +823,22 @@
 //   return false;
 // };
 // console.log(func(matrix, target));
+
+function func(pls, h) {
+  let l = 1;
+  let r = Math.max(...pls);
+  while (l < r) {
+    const mP = Math.floor((l + r) / 2);
+    let th = 0;
+    for (let p of pls) {
+      let s = p / mP;
+      th += Math.ceil(s);
+    }
+    if (th <= h) r = mP;
+    else l = mP + 1;
+  }
+  return l;
+}
+const piles = [3, 6, 7, 11],
+  h = 8;
+console.log(func(piles, h));
