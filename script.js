@@ -612,11 +612,8 @@
 //   }
 //   return maxLength;
 // }
-
 // const s = "ABAB", k = 2;
-
 // console.log(func(s, k)); // Expected output: 4
-
 // function func(s, k) {
 //   const result = [];
 //   const deque = [];
@@ -631,15 +628,12 @@
 //   }
 //   return result;
 // }
-
 // const nums = [1, 3, -1, -3, 5, 3, 6, 7],
 //   k = 3;
 // console.log(func(s, k)); // Expected output:
-
 // function func(s) {
 //   const stack = [];
 //   const map = { "(": ")", "[": "]", "{": "}" };
-
 //   for (let i = 0; i < s.length; i++) {
 //     let str = s[i];
 //     if (map.hasOwnProperty(str)) {
@@ -653,15 +647,12 @@
 //   }
 //   return stack.length === 0;
 // }
-
 // const s = "()";
 // console.log(func(s));
-
 // function Function() {
 //   this.stack = [];
 //   this.minStack = [];
 // }
-
 // Function.prototype.push = function (value) {
 //   this.stack.push(value);
 //   if (
@@ -671,7 +662,6 @@
 //     this.minStack.push(value);
 //   }
 // };
-
 // Function.prototype.pop = function (value) {
 //   const popvalue = this.stack.pop();
 //   if (popvalue === this.minStack[this.minStack.length - 1]) {
@@ -684,18 +674,15 @@
 // Function.prototype.getMin = function (value) {
 //   return this.minStack[this.minStack.length - 1];
 // };
-
 // function func() {
 //   const stack = [];
 //   const operator = ["+", "-", "*", "/"];
-
 //   for (let token of tokens) {
 //     if (!operator.includes.includes(token)) {
 //       stack.push(Number(token));
 //     } else {
 //       const oprnd2 = stack.pop();
 //       const oprnd1 = stack.pop();
-
 //       switch (token) {
 //         case "+":
 //           stack.push(oprnd1 + oprnd2);
@@ -716,10 +703,8 @@
 //   }
 //   return stack.pop();
 // }
-
 // const tokens = ["2", "1", "+", "3", "*"];
 // console.log(func(tokens));
-
 // function func(n) {
 //   const array = [];
 //   const backTrack = (open, close, str) => {
@@ -858,28 +843,60 @@
 //   return nums[left];
 // }
 // console.log(func(nums));
-var func = function (nums, target) {
+// var func = function (nums, target) {
+//   let left = 0;
+//   let right = nums.length - 1;
+//   while (left <= right) {
+//     let mid = left + Math.floor((right - left) / 2);
+//     if (nums[mid] === target) {
+//       return mid;
+//     }
+//     if (nums[left] <= nums[mid]) {
+//       if (nums[left] <= target && target < nums[mid]) {
+//         right = mid - 1;
+//       } else {
+//         left = mid + 1;
+//       }
+//     } else {
+//       if (nums[mid] < target && target <= nums[right]) {
+//         left = mid + 1;
+//       } else {
+//         right = mid - 1;
+//       }
+//     }
+//   }
+//   return -1;
+// };
+// console.log(func(nums, target));
+var TimeMap = function () {
+  this.map = new Map();
+};
+TimeMap.prototype.set = function (key, value, timestamp) {
+  if (!this.map.has(key)) {
+    this.map.set(key, []);
+  }
+  this.map.get(key).push({ value, timestamp });
+};
+TimeMap.prototype.get = function (key, timestamp) {
+  if (!this.map.has(key)) {
+    return "";
+  }
+  const pairs = this.map.get(key);
   let left = 0;
-  let right = nums.length - 1;
+  let right = pairs.length - 1;
   while (left <= right) {
-    let mid = left + Math.floor((right - left) / 2);
-    if (nums[mid] === target) {
-      return mid;
-    }
-    if (nums[left] <= nums[mid]) {
-      if (nums[left] <= target && target < nums[mid]) {
-        right = mid - 1;
-      } else {
-        left = mid + 1;
-      }
+    const mid = Math.floor((left + right) / 2);
+
+    if (pairs[mid].timestamp === timestamp) {
+      return pairs[mid].value;
+    } else if (pairs[mid].timeMap < timestamp) {
+      left = mid + 1;
     } else {
-      if (nums[mid] < target && target <= nums[right]) {
-        left = mid + 1;
-      } else {
-        right = mid - 1;
-      }
+      right = mid - 1;
     }
   }
-  return -1;
+  if (right === -1) {
+    return "";
+  }
+  return pairs[right].value;
 };
-console.log(func(nums, target));
