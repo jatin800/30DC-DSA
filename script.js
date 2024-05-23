@@ -900,19 +900,52 @@
 //   }
 //   return pairs[right].value;
 // };
+// function func(head) {
+//   let previous = null;
+//   let current = head;
+//   while (current !== null) {
+//     let next = current.next;
+//     current.next = previous;
+//     previous = current;
+//     current = next;
+//   }
+//   return previous;
+// }
+// console.log(func(head));
 
-function func(head) {
-  let previous = null;
-  let current = head;
-  while (current !== null) {
-    let next = current.next;
-    current.next = previous;
-    previous = current;
-    current = next;
-  }
-  return previous;
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+
+function ListNode(val, next) {
+  this.val = val === undefined ? 0 : val;
+  this.next = next === undefined ? null : next;
 }
 
-const head = [1, 2, 3, 4, 5];
+function func(list1, list2) {
+  debugger;
+  let dummy = new ListNode(0);
+  let current = dummy;
 
-console.log(func(head));
+  while (list1 && list2) {
+    if (list1.val <= list2.val) {
+      current.next = list1;
+      list1 = list1.next;
+    } else {
+      current.next = list2;
+      list2 = list2.next;
+    }
+    current = current.next;
+  }
+  current.next = list1 || list2;
+  return dummy.next;
+}
+
+let list1 = [1, 2, 4],
+  list2 = [1, 3, 4];
+
+console.log(func(list1, list2));
